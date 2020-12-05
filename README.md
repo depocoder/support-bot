@@ -96,7 +96,7 @@ VK_TOKEN=a6e29a6d107cf50e457940fa9d997e0737c273180e8e9420e8a76eb80d0772b1ac5db2c
 1. `skip_intent` - не загружать intent.
 2. `skip_train` - не обучать dialogflow.    
     
-**Запуск парсера с аргументами**
+**Запуск ml_study с аргументами**
 
 ```
 python3 ml_study.py --skip_train
