@@ -25,8 +25,6 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
     session_client = dialogflow.SessionsClient()
 
     session = session_client.session_path(project_id, session_id)
-    print('Session path: {}\n'.format(session))
-
     text_input = dialogflow.types.TextInput(
         text=texts, language_code=language_code)
 
@@ -34,7 +32,7 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
 
     response = session_client.detect_intent(
         session=session, query_input=query_input)
-    return response.query_result.fulfillment_text
+    return response
 
 
 def start(update: Update, context: CallbackContext) -> None:
@@ -47,14 +45,14 @@ def help_command(update: Update, context: CallbackContext) -> None:
     update.message.reply_text('Help!')
 
 
-def echo(update: Update, context: CallbackContext) -> None:
-    """Echo the user message."""
+def reply_from_dialogflow(update: Update, context: CallbackContext) -> None:
     project_id = os.getenv("PROJECT_ID")
     language_code = os.getenv("LANGUAGE_CODE")
     session_id = update.effective_user
     texts = update.message.text
-    update.message.reply_text(
-        detect_intent_texts(project_id, session_id, texts, language_code))
+    response = detect_intent_texts(
+        project_id, session_id, texts, language_code)
+    update.message.reply_text(response.query_result.fulfillment_text)
 
 
 def main():
@@ -68,7 +66,7 @@ def main():
     dispatcher.add_handler(CommandHandler("help", help_command))
 
     dispatcher.add_handler(MessageHandler(
-        Filters.text & ~Filters.command, echo))
+        Filters.text & ~Filters.command, reply_from_dialogflow))
     updater.start_polling()
 
     # updater.idle()
