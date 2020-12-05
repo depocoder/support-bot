@@ -2,7 +2,7 @@
  
 Этот проект позволяет создать своего бота для быстрого ответа пользователям(VK, Telegram) при помощи [dialogflow](https://dialogflow.cloud.google.com/).
 
-![пример телеграм]()
+![пример телеграм](https://i.imgur.com/5wGUKZl.png)
 
 ## Подготовка dialogflow
 Шаг 1. Создать проект   
