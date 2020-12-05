@@ -1,7 +1,6 @@
 import os
 import logging
 
-
 import dialogflow_v2 as dialogflow
 from dotenv import load_dotenv
 from telegram import Update
@@ -59,7 +58,6 @@ def main():
     """Start the bot."""
     load_dotenv()
     updater = Updater(token=os.getenv("TG_TOKEN"), use_context=True)
-
     dispatcher = updater.dispatcher
 
     dispatcher.add_handler(CommandHandler("start", start))
@@ -68,8 +66,6 @@ def main():
     dispatcher.add_handler(MessageHandler(
         Filters.text & ~Filters.command, reply_from_dialogflow))
     updater.start_polling()
-
-    # updater.idle()
 
 
 if __name__ == '__main__':
