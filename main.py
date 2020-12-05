@@ -34,7 +34,6 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
 
     response = session_client.detect_intent(
         session=session, query_input=query_input)
-    
     return response.query_result.fulfillment_text
 
 
@@ -54,7 +53,6 @@ def echo(update: Update, context: CallbackContext) -> None:
     language_code = os.getenv("LANGUAGE_CODE")
     session_id = update.effective_user
     texts = update.message.text
-    
     update.message.reply_text(
         detect_intent_texts(project_id, session_id, texts, language_code))
 
@@ -71,8 +69,6 @@ def main():
 
     dispatcher.add_handler(MessageHandler(
         Filters.text & ~Filters.command, echo))
-
-
     updater.start_polling()
 
     # updater.idle()
