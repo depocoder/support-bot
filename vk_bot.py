@@ -1,9 +1,20 @@
 import os
 import random
+import logging
+import time
 from tg_bot import detect_intent_texts
+from requests.exceptions import ConnectionError
 from dotenv import load_dotenv
 import vk_api
 from vk_api.longpoll import VkLongPoll, VkEventType
+
+
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
+
+logger = logging.getLogger(__name__)
 
 
 def reply_from_dialogflow(event, vk_api):
@@ -21,10 +32,18 @@ def reply_from_dialogflow(event, vk_api):
 
 if __name__ == "__main__":
     load_dotenv()
-    vk_session = vk_api.VkApi(token=os.getenv("VK_TOKEN"))
-    vk_api = vk_session.get_api()
+    while True:
+        try:
+            vk_session = vk_api.VkApi(token=os.getenv("VK_TOKEN"))
+            vk_api = vk_session.get_api()
 
-    longpoll = VkLongPoll(vk_session)
-    for event in longpoll.listen():
-        if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            reply_from_dialogflow(event, vk_api)
+            longpoll = VkLongPoll(vk_session)
+            for event in longpoll.listen():
+                if event.type == VkEventType.MESSAGE_NEW and event.to_me:
+                    reply_from_dialogflow(event, vk_api)
+        except ConnectionError:
+            logging.warning('ConnectionError - перезапуск через 30 секунд')
+            time.sleep(30)
+            continue
+        except Exception as E:
+            logging.warning('Ошибка \n\n', E)
