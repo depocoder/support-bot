@@ -43,8 +43,8 @@ if __name__ == "__main__":
                 if event.type == VkEventType.MESSAGE_NEW and event.to_me:
                     reply_from_dialogflow(event, vk_api)
         except ConnectionError:
-            logging.warning('ConnectionError - перезапуск через 30 секунд')
+            logging.exception('ConnectionError - перезапуск через 30 секунд')
             time.sleep(30)
             continue
         except Exception as E:
-            logging.warning('Ошибка \n\n', E)
+            logging.exception(E)
