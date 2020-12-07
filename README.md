@@ -7,7 +7,7 @@
 ## Подготовка dialogflow
 Шаг 1. Создать проект   
 [Как создать проект в DialogFlow](https://cloud.google.com/dialogflow/es/docs/quick/setup)     
-Там же вы должны получить идентификатор проекта. Нам выдали такой:   
+Там же вы должны получить идентификатор проекта. Мне выдали такой:   
 `moonlit-dynamo-211973`   
     
 Шаг 2. Создать агента   
@@ -81,7 +81,7 @@ python3 vk_bot.py
 ```
 TG_TOKEN=1477653591:AAFWsLwFZow3r38niRfX-0v0RlMh9-x0Yo8
 GOOGLE_APPLICATION_CREDENTIALS=My First Project-d13c49bcd421150.json
-PROJECT_ID=compact-nirvana-292417614
+DIALOGFLOW_PROJECT_ID=compact-nirvana-292417614
 LANGUAGE_CODE=ru
 VK_TOKEN=a6e29a6d107cf50e457940fa9d997e0737c273180e8e9420e8a76eb80d0772b1ac5db2c012abe7a37a734
 ```
