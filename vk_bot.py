@@ -2,7 +2,7 @@ import os
 import random
 import logging
 import time
-from tg_bot import detect_intent_texts
+from detect_intent_texts import detect_intent_texts
 from requests.exceptions import ConnectionError
 from dotenv import load_dotenv
 import vk_api
