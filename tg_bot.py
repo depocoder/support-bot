@@ -36,10 +36,6 @@ def reply_from_dialogflow(update: Update, context: CallbackContext) -> None:
 def error_handler(update: Update, context: CallbackContext) -> None:
     logger.error(
         msg="Exception while handling an update:", exc_info=context.error)
-    tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
-    tb_string = ''.join(tb_list)
-
-    context.bot.send_message(chat_id=os.getenv("DEVELOPER_CHAT_ID"), text=message, parse_mode=ParseMode.HTML)
 
 
 def main():
