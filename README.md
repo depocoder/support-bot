@@ -22,11 +22,7 @@
 
 ## Подготовка к запуску Mac OS
 
-Уставновить Python 3+
-
-```
-sudo apt-get install python3
-```
+Уставновить [Python 3+](https://www.python.org/downloads/)
 
 Установить, создать и активировать виртуальное окружение
 
