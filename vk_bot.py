@@ -18,10 +18,11 @@ logger = logging.getLogger(__name__)
 
 
 def reply_from_dialogflow(event, vk_api):
-    project_id = os.getenv("PROJECT_ID")
+    project_id = os.getenv("DIALOGFLOW_PROJECT_ID")
     language_code = os.getenv("LANGUAGE_CODE")
+    session_id = f'vk-{event.user_id}'
     response = detect_intent_texts(
-        project_id, event.user_id, event.text, language_code)
+        project_id, session_id, event.text, language_code)
     if not response.query_result.intent.is_fallback:
         vk_api.messages.send(
             user_id=event.user_id,

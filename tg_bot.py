@@ -11,7 +11,6 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
-
 logger = logging.getLogger(__name__)
 
 
@@ -26,9 +25,9 @@ def help_command(update: Update, context: CallbackContext) -> None:
 
 
 def reply_from_dialogflow(update: Update, context: CallbackContext) -> None:
-    project_id = os.getenv("PROJECT_ID")
+    project_id = os.getenv("DIALOGFLOW_PROJECT_ID")
     language_code = os.getenv("LANGUAGE_CODE")
-    session_id = update.effective_user
+    session_id = f'tg-{update.effective_user.id}'
     texts = update.message.text
     response = detect_intent_texts(
         project_id, session_id, texts, language_code)
