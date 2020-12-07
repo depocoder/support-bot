@@ -1,11 +1,8 @@
 import os
 import logging
-import traceback
-import html
-import json
 from detect_intent_texts import detect_intent_texts
 from dotenv import load_dotenv
-from telegram import Update, ParseMode
+from telegram import Update
 from telegram.ext import (
     Updater, CommandHandler, MessageHandler, Filters, CallbackContext)
 
